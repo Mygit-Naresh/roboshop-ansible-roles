@@ -1,7 +1,7 @@
 - name: replace mongo.repo file
   ansible.builtin.copy:
-  src:  /root/roboshop-ansible-roles/roles/mongodb/files/mongo.repo
-  dest: /etc/yum.repos.d/mongo.repo
+    src:  /root/roboshop-ansible-roles/roles/mongodb/files/mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
 - name: install mongodb
   ansible.builtin.package:
     name: mongodb-org
