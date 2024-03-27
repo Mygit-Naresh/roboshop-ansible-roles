@@ -1,0 +1,27 @@
+- name: nodejs installation with nodejs:18
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs.yml
+- name: app setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yml
+- name: systemd service enable and start
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd.yml
+- name: copy mongo.repo file to /etc/yum.repos.d/mongo.repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo   
+- name: install mongodb client
+  ansible.builtin.package:
+    name: mongodb-org-shell
+    state: present
+- name: get product count
+  ansible.builtin.command: mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register: PRODUCT_COUNT
+- name: connect to mongodb server and load schema
+  ansible.builtin.command: mongo --host mongodb.eternaltrainings.online < /app/schema/catalogue.js
+  when: PRODUCT_COUNT.stdout == "0"
+
