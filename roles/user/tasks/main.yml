@@ -6,6 +6,9 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup.yml
+- name: npm installation based on package.json file
+  npm:
+    path: /app
 - name: install mongodb client
   ansible.builtin.import_role:
     name: common
