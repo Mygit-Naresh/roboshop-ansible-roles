@@ -12,7 +12,7 @@
     tasks_from: systemd.yml
 - name: copy mongo.repo file to /etc/yum.repos.d/mongo.repo
   ansible.builtin.copy:
-    src: mongo.repo
+    src: roles/common/files/mongo.repo
     dest: /etc/yum.repos.d/mongo.repo   
 - name: install mongodb client
   ansible.builtin.package:
