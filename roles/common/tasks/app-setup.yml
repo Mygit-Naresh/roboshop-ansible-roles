@@ -1,5 +1,6 @@
 - name: created local account
   ansible.builtin.shell:  useradd roboshop
+  ignore_errors: True
 - name: Create a directory  /app if it does not exist
   ansible.builtin.file:
     path: /app
