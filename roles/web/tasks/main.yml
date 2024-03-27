@@ -21,6 +21,6 @@
      src: roles/common/files/roboshop.conf
      dest: /etc/nginx/default.d/roboshop.conf
  - name: nginx restart
-   ansible.builtin.service:
-     name: nginx
-     state: restarted  
+   ansible.builtin.import_role:
+     name: common
+     tasks_from: systemd.yml
