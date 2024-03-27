@@ -2,11 +2,12 @@
   ansible.builtin.package:
     name: nginx
     state: present
-- name: nginx service enable and start
-  ansible.builtin.service:
-     name: nginx
-     enabled: yes
-     state: started
+- name: deamon reloaded
+  ansible.builtin.systemd_service:
+    name: nginx
+    state: started
+    daemon_reload: true
+    enabled: true
 - name: remove content from html
   ansible.builtin.file:
      path: /usr/share/nginx/html/*
