@@ -6,18 +6,17 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup.yml
+- name: Install packages based on package.json
+  npm:
+    path: /app
 - name: systemd service enable and start
   ansible.builtin.import_role:
     name: common
     tasks_from: systemd.yml
-- name: copy mongo.repo file to /etc/yum.repos.d/mongo.repo
-  ansible.builtin.copy:
-    src: roles/common/files/mongo.repo
-    dest: /etc/yum.repos.d/mongo.repo   
-- name: install mongodb client
-  ansible.builtin.package:
-    name: mongodb-org-shell
-    state: present
+- name: mongodb client install
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongoclient.yml
 - name: mongo db connect host
   ansible.builtin.command: mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: PRODUCT_COUNT
