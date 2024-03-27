@@ -4,4 +4,6 @@
   ansible.builtin.package:
     name: nodejs
     state: present
-
+- name: Install packages based on package.json
+  npm:
+    path: /app

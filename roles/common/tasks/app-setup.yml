@@ -14,10 +14,12 @@
     src:   /tmp/{{component}}.zip
     dest:  /app
     remote_src: yes
-- name: Install packages based on package.json
-  npm:
-    path: /app
+- name: change dir to /app
+  ansible.builtin.shell: cd
+  args:
+    chdir: /app
 - name: "copy {{component}} service content in /etc/systemd/system/{{component}}.service"
   ansible.builtin.copy:
-    src: "{{component}}.service"
+    src: roles/common/files/{{component}}.service
     dest: /etc/systemd/system/{{component}}.service
+

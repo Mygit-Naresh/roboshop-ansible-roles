@@ -1,0 +1,22 @@
+- name: roboshop app setup general
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: java-maven.yml
+- name:  application setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yml
+- name: package maven install
+  ansible.builtin.shell: mvn clean package
+- name:  systemd
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd.yml
+- name: mysql client install
+  ansible.builtin.package:
+    name: mysql
+    state: present
+- name: connect to mysql and load data
+  ansible.builtin.shell: mysql -h mysql.eternaltrainings.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+- name: restart shipping
+  ansible.builtin.shell: systemctl restart {{component}}

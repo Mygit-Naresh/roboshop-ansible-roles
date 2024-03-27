@@ -2,7 +2,7 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: nodejs.yml
-- name: app setup
+- name: catalogue app setup
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup.yml
@@ -18,7 +18,7 @@
   ansible.builtin.package:
     name: mongodb-org-shell
     state: present
-- name: get product count
+- name: mongo db connect host
   ansible.builtin.command: mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: PRODUCT_COUNT
 - name: connect to mongodb server and load schema

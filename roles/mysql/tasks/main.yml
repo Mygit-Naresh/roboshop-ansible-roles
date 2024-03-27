@@ -1,0 +1,17 @@
+  - name: mysql repo copy
+    ansible.inbuilt.copy:
+      src: roles/common/files/mysql.repo
+      dest: /etc/yum.repos.d/mysql.repo
+  - name: mysql repo copy
+    ansible.inbuilt.package:
+      name:  mysql-community-server
+      state: present
+  - name: mysql system service enable and start
+    ansible.inbuilt.service:   
+      name: mysqld
+      enabled: yes
+      state: restarted
+  - name: mysql set password
+    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass RoboShop@1
+  - name: mysql connect
+    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass RoboShop@1
