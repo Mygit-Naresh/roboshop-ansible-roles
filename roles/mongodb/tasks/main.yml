@@ -1,6 +1,6 @@
 - name: replace mongo.repo file
   ansible.builtin.copy:
-    src:  mongo.repo
+    src:  roles/common/files/mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
 - name: install mongodb
   ansible.builtin.package:
