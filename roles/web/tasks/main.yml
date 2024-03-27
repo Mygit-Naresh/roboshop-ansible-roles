@@ -12,15 +12,10 @@
      src: /tmp/web.zip
      dest: /usr/share/nginx/html
      remote_src: yes
- - name: Change the working directory /app
-   ansible.builtin.shell: cd
-   args:
-      chdir: /usr/share/nginx/html
  - name: Copy file 
    ansible.builtin.copy:
      src: roles/common/files/roboshop.conf
      dest: /etc/nginx/default.d/roboshop.conf
  - name: nginx restart
-   ansible.builtin.import_role:
-     name: common
-     tasks_from: systemd.yml
+   ansible.builtin.shell: systemctl restart nginx
+     
