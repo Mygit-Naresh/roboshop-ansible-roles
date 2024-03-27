@@ -16,7 +16,8 @@
 - name: mongo host connect from user
   ansible.builtin.shell:  mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("{{component}}"); db.users.count()'
   register: users_count
-- ansible.builtin.shell: "mongo --host {{mongodb.eternaltrainings.online}} < /app/schema/{{component}}.js"
+- name: connecting and loading schema
+  ansible.builtin.shell: "mongo --host mongodb.eternaltrainings.online < /app/schema/{{component}}.js"
   when: component == "user" and users_count.stdout == "0"  # keep double quotes
 
 
