@@ -1,5 +1,5 @@
 - name: install {{component}}
-  hosts:  "{{component}}"
+  hosts: ansible.cfg
   become: yes
   roles: 
   - "{{component}}"
