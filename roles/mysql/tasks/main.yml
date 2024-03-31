@@ -13,5 +13,3 @@
     state: restarted
 - name: mysql set password
   ansible.builtin.command:  mysql_secure_installation --set-root-pass RoboShop@1
-- name: mysql connect
-  ansible.builtin.shell:  mysql -uroot -p{{mysql_password}}
