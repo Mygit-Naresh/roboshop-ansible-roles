@@ -18,9 +18,9 @@
     name: common
     tasks_from: mongoclient.yml
 - name: mongo db connect host
-  ansible.builtin.command: mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  ansible.builtin.command: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: PRODUCT_COUNT
 - name: connect to mongodb server and load schema
-  ansible.builtin.command: mongo --host mongodb.eternaltrainings.online < /app/schema/catalogue.js
+  ansible.builtin.command: mongo --host {{MONGODB_HOST}} < /app/schema/catalogue.js
   when: PRODUCT_COUNT.stdout == "0"
 

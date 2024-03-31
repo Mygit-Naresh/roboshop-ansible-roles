@@ -19,7 +19,7 @@
   args:
     chdir: /app
 - name: "copy {{component}} service content in /etc/systemd/system/{{component}}.service"
-  ansible.builtin.copy:
-    src: roles/common/files/{{component}}.service
+  ansible.builtin.template:
+    src: roles/common/templates/{{component}}.service.j2
     dest: /etc/systemd/system/{{component}}.service
 

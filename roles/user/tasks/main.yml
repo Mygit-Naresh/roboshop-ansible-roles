@@ -14,11 +14,11 @@
     name: common
     tasks_from: mongoclient.yml
 - name: mongo host connect from user
-  ansible.builtin.shell:  mongo --host mongodb.eternaltrainings.online --quiet --eval 'db = db.getSiblingDB("{{component}}"); db.users.count()'
+  ansible.builtin.shell:  mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("{{component}}"); db.users.count()'
   register: users_count
 - name: connecting and loading schema
-  ansible.builtin.shell: "mongo --host mongodb.eternaltrainings.online < /app/schema/{{component}}.js"
-  when: component == "user" and users_count.stdout == "0"  # keep double quotes
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/{{component}}.js"
+  when: component == "user" and users_count.stdout == "0" 
 
 
 
