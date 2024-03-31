@@ -1,8 +1,8 @@
   - name: mysql repo copy
-    ansible.inbuilt.copy:
-      src: roles/common/templates/{{component}}.repo
+    ansible.inbuilt.template:
+      src: roles/common/templates/mysql.repo
       dest: /etc/yum.repos.d/{{component}}.repo
-  - name: mysql repo copy
+  - name: mysql server installation
     ansible.inbuilt.package:
       name:  mysql-community-server
       state: present
