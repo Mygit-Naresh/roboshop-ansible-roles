@@ -1,13 +1,13 @@
+- name:  application setup
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-setup.yml
 - name: roboshop app setup general
   ansible.builtin.import_role:
     name: common
     tasks_from: java-maven.yml
 - name: rename
   ansible.builtin.shell: mv target/{{component}}-{{shipping_version}}.jar shipping.jar
-- name:  application setup
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: app-setup.yml
 - name:  systemd
   ansible.builtin.import_role:
     name: common
