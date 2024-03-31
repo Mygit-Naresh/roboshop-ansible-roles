@@ -1,3 +1,5 @@
+- name: disable current version of mysql
+  ansible.builtin.command: dnf module disable mysql -y
 - name: mysql repo copy
   ansible.builtin.template:
    src: roles/common/templates/mysql.repo
