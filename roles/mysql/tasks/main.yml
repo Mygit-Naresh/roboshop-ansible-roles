@@ -1,7 +1,7 @@
   - name: mysql repo copy
     ansible.inbuilt.copy:
-      src: roles/common/files/mysql.repo
-      dest: /etc/yum.repos.d/mysql.repo
+      src: roles/common/templates/{{component}}.repo
+      dest: /etc/yum.repos.d/{{component}}.repo
   - name: mysql repo copy
     ansible.inbuilt.package:
       name:  mysql-community-server
@@ -12,6 +12,6 @@
       enabled: yes
       state: restarted
   - name: mysql set password
-    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass RoboShop@1
+    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}
   - name: mysql connect
-    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass RoboShop@1
+    ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}

@@ -2,12 +2,12 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: java-maven.yml
+- name: rename
+  ansible.builtin.shell: mv target/{{component}}-{{shipping_version}}.jar shipping.jar
 - name:  application setup
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup.yml
-- name: package maven install
-  ansible.builtin.shell: mvn clean package
 - name:  systemd
   ansible.builtin.import_role:
     name: common
@@ -17,6 +17,6 @@
     name: mysql
     state: present
 - name: connect to mysql and load data
-  ansible.builtin.shell: mysql -h mysql.eternaltrainings.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+  ansible.builtin.shell: mysql -h {{MYSQL_HOST}}  -uroot {{mysql_password}} < /app/schema/{{component}}.sql
 - name: restart shipping
   ansible.builtin.shell: systemctl restart {{component}}

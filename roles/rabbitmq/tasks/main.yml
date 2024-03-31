@@ -11,7 +11,7 @@
     name: rabbitmq-server 
     enabled: yes
     state: start
-- name: rabbit rabbitmq create user and pwd
+- name: rabbitmq create user and pwd
   ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
 - name: rabbit rabbitmq create user and pwd
   ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
