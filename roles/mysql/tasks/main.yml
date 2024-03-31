@@ -1,17 +1,17 @@
 - name: mysql repo copy
-  ansible.inbuilt.template:
+  ansible.builtin.template:
    src: roles/common/templates/mysql.repo
    dest: /etc/yum.repos.d/{{component}}.repo
 - name: mysql server installation
-  ansible.inbuilt.package:
+  ansible.builtin.package:
     name:  mysql-community-server
     state: present
 - name: mysql system service enable and start
-  ansible.inbuilt.service:   
+  ansible.builtin.service:   
     name: mysqld
     enabled: yes
     state: restarted
 - name: mysql set password
-  ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}
+  ansible.builtin.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}
 - name: mysql connect
-  ansible.inbuilt.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}
+  ansible.builtin.shell:  mysql_secure_installation --set-root-pass {{mysql_password}}
