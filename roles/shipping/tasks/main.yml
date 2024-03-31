@@ -7,7 +7,7 @@
     name: common
     tasks_from: java-maven.yml
 - name: rename
-  ansible.builtin.shell: mv target/{{component}}-{{shipping_version}}.jar shipping.jar
+  ansible.builtin.shell: mv /app/target/{{component}}-{{shipping_version}}.jar shipping.jar
 - name:  systemd
   ansible.builtin.import_role:
     name: common
