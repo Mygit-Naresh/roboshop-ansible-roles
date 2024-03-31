@@ -17,6 +17,6 @@
     name: mysql
     state: present
 - name: connect to mysql and load data
-  ansible.builtin.shell: mysql -h {{MYSQL_HOST}}  -uroot {{mysql_password}} < /app/schema/{{component}}.sql
+  ansible.builtin.command: mysql -h {{MYSQL_HOST}}  -uroot {{mysql_password}} < /app/schema/{{component}}.sql
 - name: restart shipping
   ansible.builtin.shell: systemctl restart {{component}}
