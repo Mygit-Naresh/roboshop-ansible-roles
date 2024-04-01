@@ -22,6 +22,7 @@
   ansible.builtin.command: mysql -h {{MYSQL_HOST}}  -uroot {{mysql_password}} < /app/schema/{{component}}.sql
 - name: restart shipping
   ansible.builtin.shell: systemctl restart {{component}}
-- name: importing deploment roles with tags
+- name: importing deployment tasks with tags
   ansible.builtin.import_role:
-     name: deployment
+     name: common
+     tasks_from: deployment
