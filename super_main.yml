@@ -1,7 +1,7 @@
 - name: install {{component}}
-  hosts: "{{component}}"
+  hosts: localhost
   vars_files:
-  -  variables.yml
+  -  variables-{{env}}.yml
   become: yes
   roles: 
   - "{{component}}"
